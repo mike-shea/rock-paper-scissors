@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TypeSelectionButton from './TypeSelectionButton';
 import { GameSelections, WinStates } from './types';
-import { AnimatePresence, motion } from 'framer-motion';
 import PlayAgainButton from './PlayAgainButton';
 import User2Selection from './User2Selection';
 
