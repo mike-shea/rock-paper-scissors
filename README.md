@@ -46,7 +46,7 @@ Users should be able to:
 
 ### What I learned
 
-- How to properly render the exit animation when a component when is dismounted / removed from the DOM.
+- How to properly render the exit animation when a component is dismounted / removed from the DOM.
 
 ```tsx
 // Component used for exit animatins:
@@ -64,16 +64,13 @@ Users should be able to:
 </AnimatePresence>
 ```
 
-- Removed dependencies to load content on component mount s(useEffect).
-  I applied functions / actions directly to user events. (onClick).
+- Improved state patterns: replaced useEffect() and applied functions / actions directly to user events. (onClick).
 
-- Avoided asynchronous events (setTimeout) and relied on Framer's `onAnimationComplete()`, to make sure the user's score is only shown AFTER the animation is done.
+- Avoided asynchronous events (setTimeout) and relied on Framer's `onAnimationComplete()`, to make sure the user's score is only shown AFTER the animation is complete.
 
 - Triangle-based layouts are not for the faint of heart.
 
 - Rendering SVGs fills with tailwindcss is not very intuitive. My solution was to use individual SVG functional components.
-
--
 
 ### Continued development
 
@@ -92,7 +89,3 @@ Users should be able to:
 - Twitter - [@ohhTHATmike](https://www.twitter.com/ohhthatmike)
 
 ## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
