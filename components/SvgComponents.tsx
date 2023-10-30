@@ -33,7 +33,7 @@ export function LogoSvg() {
   );
 }
 
-interface SvgProps {
+export interface SvgProps {
   className?: string;
   containerClass?: string;
 }

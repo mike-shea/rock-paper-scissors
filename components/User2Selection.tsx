@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GameContext } from '../pages';
 import { motion } from 'framer-motion';
-import TypeSelectionButton from './TypeSelectionButton';
-import { GameSelections } from './types';
+import { TypeSelectionButton } from './TypeSelectionButton';
 
-export default function User2Selection(props: { gameState: GameSelections }) {
+export default function User2Selection() {
+  const GameState = useContext(GameContext)
   return (
     <div className="order-2 flex flex-row items-center justify-center gap-4 md:order-3 md:flex-col md:gap-0">
       <h2 className="pb-8 text-center text-xl uppercase tracking-wide text-white">House Picked</h2>
@@ -20,7 +21,7 @@ export default function User2Selection(props: { gameState: GameSelections }) {
           key="user2-reveal"
           initial={{ scale: 0.3, opacity: 0 }}
           animate={{ scale: 1, opacity: 1, transition: { delay: 0.7 } }}>
-          <TypeSelectionButton disable={true} user1={false} type={props.gameState.user2} />
+          <TypeSelectionButton disable={true} selection_type={GameState.user2_selection} />
         </motion.div>
       </div>
     </div>

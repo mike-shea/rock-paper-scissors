@@ -1,24 +1,32 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import Game from '../components/Game';
 import Header from '../components/Header';
-import { GameSelections } from '../components/types';
+import type { GameSelections, selection_type } from '../components/types';
 
-const initialGameState = {
-  user1: null,
-  user2: null,
-  winState: null
-};
+
+export const GameContext = createContext<GameSelections>({
+  user1_selection: null,
+  set_user1_selection: () => {},
+  user2_selection: null,
+  set_user2_selection: () => {},
+  user1_score: 0,
+  set_user1_score: () => {}
+}); 
 
 const Home: NextPage = () => {
-  const [score, setScore] = useState(0);
-  const [gameState, setGameState] = useState<GameSelections>(initialGameState);
-  const [reveal, setReveal] = useState(false);
-
-  function playAgain() {
-    setGameState(initialGameState);
-    setReveal(true);
+  const [user1_score, set_user1_score] = useState(0);
+  const [user1_selection, set_user1_selection] = useState<selection_type>(null);
+  const [user2_selection, set_user2_selection] = useState<selection_type>(null);
+  
+  const GameStateValue = {
+    user1_selection,
+    user2_selection,
+    user1_score,
+    set_user1_selection,
+    set_user2_selection,
+    set_user1_score,
   }
 
   return (
@@ -30,14 +38,10 @@ const Home: NextPage = () => {
       </Head>
       <div className="radialBgDiv"></div>
       <main className="mx-auto max-w-5xl p-12">
-        <Header reveal={reveal} score={score} />
-        <Game
-          setReveal={setReveal}
-          playAgain={playAgain}
-          gameState={gameState}
-          setGameState={setGameState}
-          setScore={setScore}
-        />
+        <GameContext.Provider value={GameStateValue}>
+          <Header />
+          <Game />
+        </GameContext.Provider>
       </main>
 
       <footer></footer>
