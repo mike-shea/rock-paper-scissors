@@ -8,8 +8,7 @@ export default function Game() {
   const GameState = useContext(GameContext);
 
   return (
-    <div className="flex grow justify-center ">
-      <div className="w-full max-w-3xl pt-36">
+      <div className="w-full">
         <AnimatePresence>
           {GameState.user1_selection === null ? (
             <motion.div
@@ -30,6 +29,5 @@ export default function Game() {
           )}
         </AnimatePresence>
       </div>
-    </div>
   );
 }

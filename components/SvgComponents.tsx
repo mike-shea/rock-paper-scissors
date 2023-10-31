@@ -35,13 +35,13 @@ export function LogoSvg() {
 
 export interface SvgProps {
   className?: string;
-  containerClass?: string;
+  classGroup?: string;
 }
 
 export function PaperSvg(props: SvgProps) {
   return (
     <svg
-      className={props.containerClass}
+      className={props.classGroup}
       width="42"
       height="42"
       viewBox="0 0 42 42"
@@ -59,7 +59,7 @@ export function PaperSvg(props: SvgProps) {
 export function ScissorsSvg(props: SvgProps) {
   return (
     <svg
-      className={props.containerClass}
+      className={props.classGroup}
       width="42"
       height="42"
       viewBox="0 0 42 42"
@@ -77,7 +77,7 @@ export function ScissorsSvg(props: SvgProps) {
 export function RockSvg(props: SvgProps) {
   return (
     <svg
-      className={props.containerClass}
+      className={props.classGroup}
       width="42"
       height="42"
       viewBox="0 0 42 42"
@@ -95,7 +95,7 @@ export function RockSvg(props: SvgProps) {
 export function TriangleSvg(props: SvgProps) {
   return (
     <svg
-      className={props.containerClass}
+      className={props.classGroup}
       width="313"
       height="278"
       xmlns="http://www.w3.org/2000/svg"

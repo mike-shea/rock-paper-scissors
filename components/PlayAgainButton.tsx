@@ -6,9 +6,9 @@ import { get_number_from_selection } from '../helpers/helpers';
 import { selection_type, win_state } from './types';
 
 const state_messsage = {
-  'user2': 'You lost',
+  'user1': 'You won',
   'tied': 'Tie game',
-  'user1': 'You won'
+  'user2': 'You lost',
 }
 
 function get_winner(user1_choice: selection_type, user2_choice: selection_type) {
@@ -47,7 +47,7 @@ export function PlayAgainButton() {
       transition={{ delay: 0.4, ease: 'anticipate', duration: 0.25 }}
       initial={{ width: 0, opacity: 0 }}
       animate={{ width: 'auto', opacity: 1 }}
-      className="order-3 md:order-2">
+      className="order-3 md:order-2 w-full md:w-auto">
       <motion.div
         transition={{ delay: 0.8 }}
         initial={{ opacity: 0, scaleX: 0 }}

@@ -5,10 +5,18 @@ import TrianlgeIcon from '../images/bg-triangle.svg';
 export default function UserSelection() {
   return (
     <div className="relative flex aspect-video w-full flex-col">
-      <div className="absolute z-0 aspect-video h-full w-full ">
-        <Image className="select-none" priority layout="fill" src={TrianlgeIcon.src} />
+      <div className="flex w-full absolute z-0">
+        <svg className='flex transform rotate-180 mt-16 h-auto w-full' viewBox="0 0 1014 609">
+        <path
+          style={{fill: 'transparent'}}
+          d="M507 90.2L891 551H123L507 90.2Z"
+          stroke="#131A38"
+          strokeOpacity={0.4}
+          stroke-width="40"
+        />
+        </svg>
       </div>
-      <div className="z-20 -mt-20 flex justify-between">
+      <div className="z-20 flex justify-between">
         <TypeSelectionButton selection_type='paper' />
         <TypeSelectionButton selection_type='rock' />
       </div>

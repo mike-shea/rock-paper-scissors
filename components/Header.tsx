@@ -8,10 +8,8 @@ export default function Header() {
   const GameState = useContext(GameContext);
 
   return (
-    <header className="flex w-full justify-between rounded-xl border-2 border-slate-400/60 p-4">
-      <div className="maxx-w-xs w-full">
-        <LogoSvg />
-      </div>
+    <header className="flex w-full gap-4 justify-between rounded-xl border-2 border-slate-400/60 p-4">
+      <LogoSvg />
       <Score />
     </header>
   );

@@ -4,7 +4,7 @@ import { GameContext } from '../pages';
 export default function Score() {
   const GameState = useContext(GameContext);
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-1 rounded-lg bg-white p-4">
+    <div className="flex aspect-square h-full flex-col items-center justify-center gap-1 rounded-lg bg-white p-4">
       <h2 className="text-base font-semibold uppercase leading-none tracking-wide text-slate-400">
         Score
       </h2>
