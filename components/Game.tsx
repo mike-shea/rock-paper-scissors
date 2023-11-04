@@ -1,33 +1,37 @@
-import React, { useContext } from 'react';
-import { WhoWon } from './WhoWon';
-import UserSelection from './UserSelection';
-import { AnimatePresence, motion } from 'framer-motion';
-import { GameContext } from '../pages';
+import React, { useContext } from "react";
+import { WinnerStage } from "./stages/WinnerStage";
+import { SelectStage } from "./stages/SelectStage";
+import { AnimatePresence, motion } from "framer-motion";
+import { GameContext } from "../pages";
 
-export default function Game() {
-  const GameState = useContext(GameContext);
+type transitionWrapperProps = { key: string; children: React.ReactNode };
+function TransitionWrapper({ key, children }: transitionWrapperProps) {
+  return (
+    <motion.div
+      key={key}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { delay: 0.25 } }}
+      exit={{ opacity: 0, transition: { duration: 0.2 } }}>
+      {children}
+    </motion.div>
+  );
+}
+
+export function Game() {
+  const { stage } = useContext(GameContext);
 
   return (
-      <div className="w-full">
-        <AnimatePresence>
-          {GameState.user1_selection === null ? (
-            <motion.div
-              key="one"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.25 } }}
-              exit={{ opacity: 0, transition: { duration: 0.2 } }}>
-              <UserSelection />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="two"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.25 } }}
-              exit={{ opacity: 0, transition: { duration: 0.2 } }}>
-              <WhoWon />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+    <AnimatePresence>
+      {stage === "select" ? (
+        <TransitionWrapper key="one">
+          <SelectStage />
+        </TransitionWrapper>
+      ) : null}
+      {stage === "winner" ? (
+        <TransitionWrapper key="two">
+          <WinnerStage />
+        </TransitionWrapper>
+      ) : null}
+    </AnimatePresence>
   );
 }

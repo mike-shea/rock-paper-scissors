@@ -1,79 +1,61 @@
-import React, { useContext, useState } from 'react';
-import { motion } from 'framer-motion';
-import { GameContext } from '../pages';
-
-import { get_number_from_selection } from '../helpers/helpers';
-import { selection_type, win_state } from './types';
+import React, { useContext } from "react";
+import { motion } from "framer-motion";
+import { GameContext } from "../pages";
 
 const state_messsage = {
-  'user1': 'You won',
-  'tied': 'Tie game',
-  'user2': 'You lost',
-}
-
-function get_winner(user1_choice: selection_type, user2_choice: selection_type) {
-  const user1_score = get_number_from_selection(user1_choice);
-  const user2_score = get_number_from_selection(user2_choice);
-  console.log({ user1_score, user2_score })
-  const finalScore = (user1_score && user2_score) ? (user1_score - user2_score) : null;
-  if (finalScore === null) throw new Error('unable to determine score.');
-  switch (finalScore) {
-    case 0: return 'tied';
-    case 1: return 'user1';
-    case 2: return 'user2';
-    case -1: return 'user2';
-    case -2: return 'user1';
-    default: return null;
-  }
-
-}
+  user1: "You won",
+  user2: "You lost",
+  tied: "Tie game",
+};
 
 export function PlayAgainButton() {
-  const [winner, set_winner] = useState<'tied' | 'user1' | 'user2' | null>(null);
-  const GameState = useContext(GameContext);
-  const user1 = GameState.user1_selection;
-  const user2 = GameState.user2_selection;
+  const {
+    winner,
+    user1_selection,
+    stage,
+    set_winner,
+    set_user1_score,
+    set_user1_selection,
+    set_user2_selection,
+    set_stage,
+  } = useContext(GameContext);
 
-  if (!winner && user1 && user2) {
-    const winner = get_winner(user1, user2);
-    set_winner(winner);
-  }
-
-  const end_message =  winner ? state_messsage[winner] : '';
+  const playagain_onClickHandler = () => {
+    if (!user1_selection || !winner || stage !== "winner") return;
+    set_user1_score((prev) => {
+      switch (winner) {
+        case "user1":
+          return prev + 1;
+        case "tied":
+          return prev;
+        case "user2":
+          return prev > 0 ? prev - 1 : prev;
+        default:
+          return prev;
+      }
+    });
+    set_stage("select");
+    setTimeout(() => {
+      set_winner(null);
+      set_user1_selection(null);
+      set_user2_selection(null);
+    }, 250);
+  };
 
   return (
     <motion.div
-      key="keyid2"
-      transition={{ delay: 0.4, ease: 'anticipate', duration: 0.25 }}
-      initial={{ width: 0, opacity: 0 }}
-      animate={{ width: 'auto', opacity: 1 }}
-      className="order-3 md:order-2 w-full md:w-auto">
-      <motion.div
-        transition={{ delay: 0.8 }}
-        initial={{ opacity: 0, scaleX: 0 }}
-        animate={{ opacity: 1, scaleX: 1 }}
-        className="flex w-full flex-col items-stretch gap-4  ">
-        <h1 className=" text-center text-3xl font-bold uppercase tracking-wider text-white">
-          {end_message}
-        </h1>
-        <button
-          onClick={() => {
-            GameState.set_user1_score(prev => {
-              switch (winner) {
-                case 'user1': return prev + 1;
-                case 'tied': return prev;
-                case 'user2': return prev > 0 ? prev - 1 : prev;
-                default: return prev;
-              }
-            });
-            GameState.set_user1_selection(null);
-            GameState.set_user2_selection(null);
-            set_winner(null);
-          }}
-          className="rounded-xl bg-white px-10 py-4 font-semibold uppercase tracking-widest">
-          play again
-        </button>
-      </motion.div>
+      transition={{ delay: 0.8 }}
+      initial={{ opacity: 0, scaleX: 0 }}
+      animate={{ opacity: 1, scaleX: 1 }}
+      className="order-3 flex w-full flex-col items-stretch gap-4 md:order-2 md:w-auto  ">
+      <h1 className=" text-center text-3xl font-bold uppercase tracking-wider text-white">
+        {winner ? state_messsage[winner] : ""}
+      </h1>
+      <button
+        onClick={playagain_onClickHandler}
+        className="rounded-xl bg-white/90 px-10 py-4 font-semibold uppercase tracking-widest transition hover:bg-white">
+        play again
+      </button>
     </motion.div>
   );
 }
