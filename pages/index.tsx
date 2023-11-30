@@ -3,12 +3,7 @@ import Head from "next/head";
 import React, { useState, createContext } from "react";
 import { Game } from "../components/Game";
 import { Header } from "../components/Header";
-import type {
-  game_context_type,
-  selection_type,
-  stage_type,
-  win_type,
-} from "../types/types";
+import type { game_context_type, selection_type, stage_type, win_type } from "../types/types";
 
 export const GameContext = createContext<game_context_type>({
   user1_selection: null,
@@ -51,7 +46,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <div className="radialBgDiv"></div> */}
-      <main className="mx-auto flex max-w-5xl flex-col gap-12 p-4 sm:p-12">
+      <main className="mx-auto flex max-w-5xl flex-col gap-16 p-4 sm:p-8">
         <GameContext.Provider value={GameStateValue}>
           <Header />
           <Game />

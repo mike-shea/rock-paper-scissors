@@ -23,12 +23,12 @@ export function Game() {
   return (
     <AnimatePresence>
       {stage === "select" ? (
-        <TransitionWrapper key="one">
+        <TransitionWrapper key={stage}>
           <SelectStage />
         </TransitionWrapper>
       ) : null}
       {stage === "winner" ? (
-        <TransitionWrapper key="two">
+        <TransitionWrapper key={stage}>
           <WinnerStage />
         </TransitionWrapper>
       ) : null}

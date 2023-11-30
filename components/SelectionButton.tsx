@@ -36,25 +36,20 @@ type SelectionButtonProps = {
   selection_type: selection_type;
   disable?: boolean;
 };
-export function SelectionButton({
-  selection_type,
-  disable,
-}: SelectionButtonProps) {
-  const { user1_selection, set_user1_selection, stage, set_stage } =
-    useContext(GameContext);
+export function SelectionButton({ selection_type, disable }: SelectionButtonProps) {
+  const { user1_selection, set_user1_selection, stage, set_stage } = useContext(GameContext);
 
   const styles = {
-    layer1: "",
-    layer2: "",
-    Icon: () => <></>,
-    ...(selection_type ? button_styles[selection_type] : {}),
+    layer1: selection_type ? button_styles?.[selection_type]?.layer1 : "",
+    layer2: selection_type ? button_styles?.[selection_type]?.layer2 : "",
+    Icon: selection_type ? button_styles?.[selection_type]?.Icon : () => <></>,
   };
 
   return (
     <button
       disabled={disable ?? false}
       onClick={() => {
-        // If selection is already made, dont allow over-ride.
+        // prevents user from double clicking
         if (user1_selection || stage === "winner") return;
 
         // set user selection
@@ -63,18 +58,15 @@ export function SelectionButton({
       }}
       className={`group rounded-full ${styles.layer1}`}>
       <div
-        className={`flex aspect-square h-32 w-32 -translate-y-3 items-center justify-center rounded-full transition sm:h-44 sm:w-44 ${
+        className={`flex aspect-square h-32 w-32 -translate-y-3 items-center justify-center rounded-full transition sm:h-44 sm:w-44 md:h-52 md:w-52 ${
           !disable && "group-hover:-translate-y-4 group-active:-translate-y-1"
-        } md:h-64 md:w-64 ${styles.layer2}`}>
-        <div className="flex aspect-square h-24 w-24 overflow-hidden rounded-full bg-slate-300 sm:h-36 sm:w-36 md:h-52 md:w-52">
+        } ${styles.layer2}`}>
+        <div className="flex aspect-square h-4/5 w-4/5 overflow-hidden rounded-full bg-slate-300">
           <div
-            className={`flex aspect-square h-24 w-24 translate-y-2 items-center justify-center rounded-full bg-white transition sm:h-36 sm:w-36 ${
+            className={`flex aspect-square h-[100%] w-[100%] translate-y-2 items-center justify-center rounded-full bg-white transition ${
               !disable && "group-hover:translate-y-1 group-active:translate-y-3"
-            }  md:h-52 md:w-52`}>
-            <styles.Icon
-              className=""
-              classGroup="md:h-32 md:w-32 sm:h-24 sm:w-24 w-12 h-12"
-            />
+            } `}>
+            <styles.Icon className="" classGroup="h-[55%] w-[55%]" />
           </div>
         </div>
       </div>

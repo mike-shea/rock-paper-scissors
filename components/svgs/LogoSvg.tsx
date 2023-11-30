@@ -1,28 +1,11 @@
 export function LogoSvg() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="162"
-      height="99">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="162" height="99">
       <defs>
-        <filter
-          id="a"
-          width="107.7%"
-          height="112.9%"
-          x="-3.9%"
-          y="-3.2%"
-          filterUnits="objectBoundingBox">
+        <filter id="a" width="107.7%" height="112.9%" x="-3.9%" y="-3.2%" filterUnits="objectBoundingBox">
           <feOffset dy="3" in="SourceAlpha" result="shadowOffsetOuter1" />
-          <feGaussianBlur
-            in="shadowOffsetOuter1"
-            result="shadowBlurOuter1"
-            stdDeviation="1.5"
-          />
-          <feColorMatrix
-            in="shadowBlurOuter1"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.196705638 0"
-          />
+          <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
+          <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.196705638 0" />
         </filter>
         <path
           id="b"
